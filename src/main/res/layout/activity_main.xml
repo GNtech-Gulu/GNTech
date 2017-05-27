@@ -1,0 +1,61 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollview"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:scrollbars="horizontal"  >
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.tal.alert.MainActivity">
+
+
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TableRow  android:gravity="center">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/logo"
+                    android:layout_gravity="center"
+                    android:layout_span="1"/>
+
+            </TableRow>
+
+            <TableRow android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="\nALERT SECURITY SYSTEM"
+                    android:id="@+id/textView"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="#f00"/>
+            </TableRow>
+
+            <TableRow  android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="\nHello! Click on me to\n own me and be secured"
+                    android:id="@+id/textView1"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:layout_span="1"/>
+            </TableRow>
+        </TableLayout>
+
+
+    </RelativeLayout>
+    </ScrollView>

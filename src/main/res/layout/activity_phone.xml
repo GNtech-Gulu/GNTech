@@ -1,3 +1,4 @@
+<!-- this is the relative layout xml codes -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -5,11 +6,16 @@
         tools:context="com.example.tal.alert.Phone">
 
 
+<!-- this is the table layout xml codes -->
+
 
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
+
+
+<!-- this is the table row xml codes -->
         <TableRow>
 
             <TextView
@@ -61,6 +67,8 @@
             </TableRow>
 
             <TableRow>
+
+                <!-- this is the button xml codes -->
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

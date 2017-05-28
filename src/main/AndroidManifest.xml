@@ -26,13 +26,18 @@
         </activity>
 
 
+
+        <!-- this is intent registration in the manifest file -->
+
         <receiver android:name="com.example.tal.alert.MyBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.BATTERY_CHANGED" />
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+
 
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>

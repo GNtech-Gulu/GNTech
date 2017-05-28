@@ -23,7 +23,7 @@ public class Phone extends Activity {
         setContentView(R.layout.activity_phone);
 
 
-        // This is opendatabase SQLite database and table creaction
+        // This is SQLite database and table creation
         try {
             db = SQLiteDatabase.openDatabase("sdcard/phonenumber.db", null, SQLiteDatabase.CREATE_IF_NECESSARY);
             db.execSQL("create table phonenum(" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + " Tel TEXT)");
@@ -35,7 +35,7 @@ public class Phone extends Activity {
         final Button sub =(Button)findViewById(R.id.sendDatax);
 
 
-        // phone number inserting into database
+        // This to insert phone number into the database
         sub.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -55,7 +55,7 @@ public class Phone extends Activity {
 
 
 
-//selecting and vieweing phone number submitted to the database
+// To select and view phone number submitted to the database
         final Button view_sms = (Button) findViewById(R.id.phonenu);
         view_sms.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -84,7 +84,7 @@ public class Phone extends Activity {
 
 
 
-// deleting phone number inserted into the database
+// To delete phone number inserted in the database
         final Button deletex = (Button) findViewById(R.id.deletex);
         deletex.setOnClickListener( new View.OnClickListener() {
                     @Override
@@ -95,14 +95,6 @@ public class Phone extends Activity {
                     }
                 }
         );
-
-
-
-
-
-
-
-
 
 
     }

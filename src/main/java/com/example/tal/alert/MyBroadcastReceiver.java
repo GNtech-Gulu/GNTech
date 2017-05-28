@@ -7,29 +7,40 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
-
-
+import android.widget.Toast;
 
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
 
     // Get the object of SmsManager
     final SmsManager sms = SmsManager.getDefault();
+
+
     String device_id="";
     String phonenum="";
 
     SQLiteDatabase db;
 
+    //private static variable for battery level intent declared
+    private final static String BATTERY_LEVEL = "level";
 
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        // this is battery level intent it checks the level of battery
+        int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+
+        Toast.makeText(context, level, Toast.LENGTH_LONG).show();
+
+
 
 
         // This is opendatabase SQLite database and table creaction
